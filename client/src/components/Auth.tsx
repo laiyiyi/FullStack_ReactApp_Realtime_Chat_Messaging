@@ -12,6 +12,9 @@ interface IForm {
   phoneNumber: string;
   avatarURL: string;
 }
+
+const cookies = new Cookies();
+
 const initialState = {
   fullName: "",
   userName: "",
@@ -29,9 +32,36 @@ const Auth = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-  }
+
+    const { fullName, username, password, phoneNumber, avatarURL } = form;
+
+    const URL = "http://localhost:5000/auth";
+
+    const {
+      data: { token, userId, hashedPassowrd },
+    } = await axios.post(`${URL}/${isSignup ? "signup" : "login"}`, {
+      username,
+      password,
+      fullName,
+      phoneNumber,
+      avatarURL,
+    });
+
+    cookies.set("token", token);
+    cookies.set("username", username);
+    cookies.set("fullName", fullName);
+    cookies.set("userId", userId);
+
+    if (isSignup) {
+      cookies.set("phoneNumber", phoneNumber);
+      cookies.set("avatarURL", avatarURL);
+      cookies.set("hashedPassowrd", hashedPassowrd);
+    }
+
+    window.location.reload();
+  };
 
   const switchMode = () => {
     setIsSignup((prevIsSignUp) => !prevIsSignUp);
