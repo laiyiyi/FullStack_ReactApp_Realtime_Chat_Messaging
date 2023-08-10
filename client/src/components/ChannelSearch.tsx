@@ -3,20 +3,26 @@ import { useChatContext } from "stream-chat-react";
 
 import { ResultsDropdown } from ".";
 import { SearchIcon } from "../assets";
+import { Channel } from "stream-chat";
+import { DefaultStreamChatGenerics } from "stream-chat-react/dist/types/types";
 
-const ChannelSearch = ({setToggleContainer}: {setToggleContainer: Dispatch<SetStateAction<boolean>>}) => {
+const ChannelSearch = ({
+  setToggleContainer,
+}: {
+  setToggleContainer: Dispatch<SetStateAction<boolean>>;
+}) => {
   const { client, setActiveChannel } = useChatContext();
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [teamChannels, setTeamChannels] = useState([]);
   const [directChannels, setDirectChannels] = useState([]);
 
-  useEffect(()=>{
-    if(!query) {
-      setTeamChannels([])
-      setDirectChannels([])
+  useEffect(() => {
+    if (!query) {
+      setTeamChannels([]);
+      setDirectChannels([]);
     }
-  }, [query])
+  }, [query]);
 
   const getChannels = async (text: string) => {
     try {
@@ -51,10 +57,10 @@ const ChannelSearch = ({setToggleContainer}: {setToggleContainer: Dispatch<SetSt
     getChannels(event.target.value);
   };
 
-  const setChannel = (channel) => {
-    setQuery('');
+  const setChannel = (channel: Channel<DefaultStreamChatGenerics>) => {
+    setQuery("");
     setActiveChannel(channel);
-  }
+  };
 
   return (
     <div className="channel-search__container">
@@ -76,8 +82,8 @@ const ChannelSearch = ({setToggleContainer}: {setToggleContainer: Dispatch<SetSt
           directChannels={directChannels}
           loading={loading}
           setChannel={setChannel}
-          setQuery={setQuery}
-          setToggleContainer = {setToggleContainer}/>
+          setToggleContainer={setToggleContainer}
+        />
       )}
     </div>
   );
