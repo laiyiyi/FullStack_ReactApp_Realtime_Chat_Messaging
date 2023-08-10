@@ -11,6 +11,7 @@ interface IProps {
   setIsCreating: Dispatch<SetStateAction<boolean>>;
   setIsEditing: boolean;
   setCreateType: Dispatch<SetStateAction<string>>;
+  setToggleContainer: Dispatch<SetStateAction<boolean>>;
 }
 
 const TeamChannelList = ({
@@ -22,6 +23,7 @@ const TeamChannelList = ({
   setIsCreating,
   setIsEditing,
   setCreateType,
+  setToggleContainer
 }: IProps) => {
   if (error) {
     return type === "team" ? (
