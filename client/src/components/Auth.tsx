@@ -6,7 +6,7 @@ import signinImage from "../assets/signup.jpg";
 
 interface IForm {
   fullName: string;
-  userName: string;
+  username: string;
   password: string;
   confirmPassword: string;
   phoneNumber: string;
@@ -17,7 +17,7 @@ const cookies = new Cookies();
 
 const initialState = {
   fullName: "",
-  userName: "",
+  username: "",
   password: "",
   confirmPassword: "",
   phoneNumber: "",
@@ -32,19 +32,19 @@ const Auth = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const { fullName, username, password, phoneNumber, avatarURL } = form;
+    const { username, password, phoneNumber, avatarURL } = form;
 
     const URL = "http://localhost:5000/auth";
 
     const {
-      data: { token, userId, hashedPassowrd },
+      data: { token, userId, hashedPassword, fullName },
     } = await axios.post(`${URL}/${isSignup ? "signup" : "login"}`, {
       username,
       password,
-      fullName,
+      fullName: form.fullName,
       phoneNumber,
       avatarURL,
     });
@@ -57,7 +57,7 @@ const Auth = () => {
     if (isSignup) {
       cookies.set("phoneNumber", phoneNumber);
       cookies.set("avatarURL", avatarURL);
-      cookies.set("hashedPassowrd", hashedPassowrd);
+      cookies.set("hashedPassword", hashedPassword);
     }
 
     window.location.reload();
@@ -86,10 +86,10 @@ const Auth = () => {
               </div>
             )}
             <div className="auth__form-container_fields-content_input">
-              <label htmlFor="userName">Username</label>
+              <label htmlFor="username">Username</label>
               <input
                 type="text"
-                name="userName"
+                name="username"
                 placeholder="Username"
                 onChange={handleChange}
                 required
