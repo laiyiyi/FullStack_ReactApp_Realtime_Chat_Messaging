@@ -24,6 +24,7 @@ body {
   flex: 2;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
 
   padding: 2rem;
@@ -42,6 +43,8 @@ body {
 }
 
 .auth__form-container_fields-content {
+  min-width: 400px;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
