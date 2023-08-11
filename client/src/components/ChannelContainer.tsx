@@ -1,5 +1,5 @@
-import React, { Dispatch, SetStateAction } from "react";
-import { Channel, useChatContext, MessageSimple } from "stream-chat-react";
+import { Dispatch, SetStateAction } from "react";
+import { Channel, MessageSimple } from "stream-chat-react";
 
 import { ChannelInner, CreateChannel, EditChannel } from "./";
 
@@ -18,7 +18,6 @@ const ChannelContainer = ({
   setIsEditing,
   createType,
 }: IProps) => {
-  const { channel } = useChatContext();
 
   if (isCreating) {
     return (

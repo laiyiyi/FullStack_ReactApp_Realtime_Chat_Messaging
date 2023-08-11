@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Channel } from "stream-chat";
 import { Avatar, useChatContext } from "stream-chat-react";
 

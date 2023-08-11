@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useChatContext } from "stream-chat-react";
 
 import { ResultsDropdown } from ".";
 import { SearchIcon } from "../assets";
-import { Channel } from "stream-chat";
+import { Channel, UserResponse } from "stream-chat";
 import { DefaultStreamChatGenerics } from "stream-chat-react/dist/types/types";
 
 const ChannelSearch = ({
@@ -14,8 +15,8 @@ const ChannelSearch = ({
   const { client, setActiveChannel } = useChatContext();
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const [teamChannels, setTeamChannels] = useState([]);
-  const [directChannels, setDirectChannels] = useState([]);
+  const [teamChannels, setTeamChannels] = useState<Channel<DefaultStreamChatGenerics>[]>([]);
+  const [directChannels, setDirectChannels] = useState<UserResponse<DefaultStreamChatGenerics>[]>([]);
 
   useEffect(() => {
     if (!query) {
@@ -57,7 +58,7 @@ const ChannelSearch = ({
     getChannels(event.target.value);
   };
 
-  const setChannel = (channel: Channel<DefaultStreamChatGenerics>) => {
+  const setChannel = (channel: Channel<DefaultStreamChatGenerics> | UserResponse<DefaultStreamChatGenerics>) => {
     setQuery("");
     setActiveChannel(channel);
   };

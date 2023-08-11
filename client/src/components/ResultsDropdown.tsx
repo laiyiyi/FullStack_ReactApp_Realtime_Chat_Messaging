@@ -1,19 +1,19 @@
-import React, { Dispatch, SetStateAction } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Dispatch, SetStateAction } from "react";
 import {
   Channel,
-  ChannelMemberResponse,
-  DefaultGenerics,
+  ChannelResponse,
   StreamChat,
-  UserResponse,
+  UserResponse
 } from "stream-chat";
 import { Avatar, useChatContext } from "stream-chat-react";
 import { DefaultStreamChatGenerics } from "stream-chat-react/dist/types/types";
 
 interface IProps {
-  teamChannels: ChannelMemberResponse[];
-  directChannels: UserResponse[];
+  teamChannels: Channel<DefaultStreamChatGenerics>[];
+  directChannels: UserResponse<DefaultStreamChatGenerics>[];
   loading: boolean;
-  setChannel: (channel: Channel) => void;
+  setChannel: (channel: Channel<DefaultStreamChatGenerics> | UserResponse<DefaultStreamChatGenerics>) => void;
   setToggleContainer: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -24,9 +24,9 @@ const channelByUser = async ({
   setChannel,
 }: {
   client: StreamChat;
-  setActiveChannel: (channel: Channel) => void;
-  channel: Channel<DefaultStreamChatGenerics>;
-  setChannel: (channel: Channel) => void;
+  setActiveChannel: (channel: Channel<DefaultStreamChatGenerics> | UserResponse<DefaultStreamChatGenerics>) => void;
+  channel: Channel<DefaultStreamChatGenerics> | UserResponse<DefaultStreamChatGenerics>;
+  setChannel: (channel: any) => void;
 }) => {
   const filters = {
     type: "messaging",
@@ -53,9 +53,9 @@ const SearchResult = ({
   setChannel,
   setToggleContainer,
 }: {
-  channel: Channel<DefaultGenerics>;
+  channel: ChannelResponse<DefaultStreamChatGenerics>;
   type: string;
-  setChannel: (channel: Channel<DefaultGenerics>) => void;
+  setChannel: (channel: ChannelResponse<DefaultStreamChatGenerics>) => void;
   setToggleContainer: Dispatch<SetStateAction<boolean>>;
 }) => {
   const { client, setActiveChannel } = useChatContext();
@@ -72,7 +72,7 @@ const SearchResult = ({
         className="channel-search__result-container"
       >
         <div className="result-hashtag">#</div>
-        <p className="channel-search__result-text">{channel?.data?.name}</p>
+        <p className="channel-search__result-text">{channel.name}</p>
       </div>
     );
   }
@@ -89,8 +89,8 @@ const SearchResult = ({
     >
       <div className="channel-search__result-user">
         <Avatar
-          image={channel?.image || undefined}
-          name={channel?.name}
+          image={channel.image || undefined}
+          name={channel.name}
           size={24}
         />
         <p className="channel-search__result-text">{channel.name}</p>
