@@ -7,9 +7,8 @@ interface IProps {
   error: boolean;
   loading: boolean;
   type: string;
-  isCreating: boolean;
   setIsCreating: Dispatch<SetStateAction<boolean>>;
-  setIsEditing: boolean;
+  setIsEditing: Dispatch<SetStateAction<boolean>>;
   setCreateType: Dispatch<SetStateAction<string>>;
   setToggleContainer: Dispatch<SetStateAction<boolean>>;
 }
@@ -19,7 +18,6 @@ const TeamChannelList = ({
   error = false,
   loading,
   type,
-  isCreating,
   setIsCreating,
   setIsEditing,
   setCreateType,
@@ -51,10 +49,10 @@ const TeamChannelList = ({
           {type === "team" ? "Channels" : "Direct Messages"}
         </p>
         <AddChannel
-          isCreating={isCreating}
           setIsCreating={setIsCreating}
           setIsEditing={setIsEditing}
           setCreateType={setCreateType}
+          setToggleContainer={setToggleContainer}
           type={type === "team" ? "team" : "messaging"}
         />
       </div>

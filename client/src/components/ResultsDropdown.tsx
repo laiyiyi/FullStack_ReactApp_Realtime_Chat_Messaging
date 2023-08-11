@@ -31,7 +31,7 @@ const channelByUser = async ({
   const filters = {
     type: "messaging",
     member_count: 2,
-    members: { $eq: [client.user.id!, client.userID!] },
+    members: { $eq: [client.user!.id, client.userID!] },
   };
 
   const [existingChannel] = await client.queryChannels(filters);

@@ -9,7 +9,7 @@ import LogoutIcon from "../assets/logout.png";
 interface IProps {
   isCreating: boolean;
   setIsCreating: Dispatch<SetStateAction<boolean>>;
-  setIsEditing: boolean;
+  setIsEditing: Dispatch<SetStateAction<boolean>>;
   setCreateType: Dispatch<SetStateAction<string>>;
 }
 
@@ -53,7 +53,7 @@ const ChannelListContent = ({
 }: {
   isCreating: boolean;
   setIsCreating: Dispatch<SetStateAction<boolean>>;
-  setIsEditing: boolean;
+  setIsEditing: Dispatch<SetStateAction<boolean>>;
   setCreateType: Dispatch<SetStateAction<string>>;
   setToggleContainer: Dispatch<SetStateAction<boolean>>;
 }) => {
@@ -133,7 +133,6 @@ const ChannelListContent = ({
 };
 const ChannelListContainer = ({
   isCreating,
-
   setIsCreating,
   setIsEditing,
   setCreateType,
