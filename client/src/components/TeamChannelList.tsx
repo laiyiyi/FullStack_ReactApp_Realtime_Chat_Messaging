@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, PropsWithChildren } from "react";
+import { Dispatch, SetStateAction, PropsWithChildren } from "react";
 
 import { AddChannel } from "../assets";
 import { APIErrorResponse, ErrorFromResponse } from "stream-chat";
