@@ -1,27 +1,32 @@
-# React + TypeScript + Vite
+<!-- ABOUT THE PROJECT -->
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About The Project
 
-Currently, two official plugins are available:
+![Project image](project.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is a web application in which you can have a real-time chatting with your friends.
+This application is powered with [GetStream.io](https://getstream.io/)
 
-## Expanding the ESLint configuration
+Project Demo: [Visit here](https://realtime-chat-messaging-nine.vercel.app/)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Built With
 
-- Configure the top-level `parserOptions` property like this:
+- [![React][React.js]][React-url]
+- [![TypeScript][TS-img]][TS-url]
+- [![NodeJS][Node-img]][Node-url]
+- [![Vite][Vite-img]][Vite-url]
+- [![Vercel][Vercel-img]][Vercel-url]
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[TS-img]: https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white
+[TS-url]: https://www.typescriptlang.org/
+[Node-img]: https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white
+[Node-url]: https://nodejs.org/en
+[Vite-img]: https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white
+[Vite-url]: https://vitejs.dev/
+[Vercel-img]: https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white
+[Vercel-url]: https://vercel.com
