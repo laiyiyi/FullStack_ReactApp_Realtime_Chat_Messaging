@@ -43,8 +43,7 @@ body {
 }
 
 .auth__form-container_fields-content {
-  min-width: 400px;
-  max-width: 600px;
+  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

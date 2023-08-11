@@ -23,7 +23,7 @@ const TeamChannelPreview = ({
 
   const ChannelPreview = () => (
     <p className="channel-preview__item">
-      <>{channel.data?.name || channel.data?.id}</>
+      <># {channel.data?.name || channel.data?.id}</>
     </p>
   );
 
@@ -34,7 +34,11 @@ const TeamChannelPreview = ({
 
     return (
       <div className="channel-preview__item single">
-        <Avatar image={members[0]?.user?.image} size={24} />
+        <Avatar
+          image={members[0]?.user?.image}
+          name={members[0].user!.id}
+          size={24}
+        />
         <p>
           <>{members[0]?.user?.fullName || members[0]?.user?.id}</>
         </p>
