@@ -13,7 +13,8 @@ interface IProps {
   teamChannels: Channel<DefaultStreamChatGenerics>[];
   directChannels: UserResponse<DefaultStreamChatGenerics>[];
   loading: boolean;
-  setChannel: (channel: Channel<DefaultStreamChatGenerics> | UserResponse<DefaultStreamChatGenerics>) => void;
+  // setChannel: (channel: Channel<DefaultStreamChatGenerics>) => void;
+  setChannel: (channel: any) => void;
   setToggleContainer: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -24,8 +25,8 @@ const channelByUser = async ({
   setChannel,
 }: {
   client: StreamChat;
-  setActiveChannel: (channel: Channel<DefaultStreamChatGenerics> | UserResponse<DefaultStreamChatGenerics>) => void;
-  channel: Channel<DefaultStreamChatGenerics> | UserResponse<DefaultStreamChatGenerics>;
+  setActiveChannel: (newChannel?: Channel<DefaultStreamChatGenerics> | undefined) => void;
+  channel: ChannelResponse<DefaultStreamChatGenerics> | UserResponse<DefaultStreamChatGenerics>;
   setChannel: (channel: any) => void;
 }) => {
   const filters = {
@@ -53,9 +54,9 @@ const SearchResult = ({
   setChannel,
   setToggleContainer,
 }: {
-  channel: ChannelResponse<DefaultStreamChatGenerics>;
+  channel: any;
   type: string;
-  setChannel: (channel: ChannelResponse<DefaultStreamChatGenerics>) => void;
+  setChannel: (channel: any) => void;
   setToggleContainer: Dispatch<SetStateAction<boolean>>;
 }) => {
   const { client, setActiveChannel } = useChatContext();

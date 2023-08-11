@@ -8,6 +8,8 @@ import {
 import { Avatar, useChatContext } from "stream-chat-react";
 
 import { InviteIcon } from "../assets";
+import { UserResponse } from "stream-chat";
+import { DefaultStreamChatGenerics } from "stream-chat-react/dist/types/types";
 
 interface IProps {
   setSelectedUsers: Dispatch<SetStateAction<Array<string>>>;
@@ -29,8 +31,8 @@ const UserItem = ({
   user,
   setSelectedUsers,
 }: {
-  user: { id: string };
-  setSelectedUsers: Dispatch<SetStateAction<Array<string>>>;
+  user: UserResponse<DefaultStreamChatGenerics>;
+  setSelectedUsers: Dispatch<SetStateAction<string[]>>;
 }) => {
   const [selected, setSelected] = useState(false);
 
@@ -48,8 +50,8 @@ const UserItem = ({
   return (
     <div className="user-item__wrapper" onClick={handleSelect}>
       <div className="user-item__name-wrapper">
-        <Avatar image={user.image} name={user.fullName || user.id} size={32} />
-        <p className="user-item__name">{user.fullName || user.id}</p>
+        <Avatar image={user.image} size={32} />
+        <p className="user-item__name"><>{user.fullName || user.id}</></p>
       </div>
       {selected ? <InviteIcon /> : <div className="user-item__invite-empty" />}
     </div>
@@ -58,7 +60,7 @@ const UserItem = ({
 
 const UserList = ({ setSelectedUsers }: IProps) => {
   const { client } = useChatContext();
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<UserResponse<DefaultStreamChatGenerics>[]>([]);
   const [loading, setLoading] = useState(false);
   const [listEmpty, setListEmpty] = useState(false);
   const [error, setError] = useState(false);

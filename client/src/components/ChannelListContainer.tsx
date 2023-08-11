@@ -5,6 +5,8 @@ import Cookies from "universal-cookie";
 import { ChannelSearch, TeamChannelList, TeamChannelPreview } from "./";
 import HospitalIcon from "../assets/hospital.png";
 import LogoutIcon from "../assets/logout.png";
+import { Channel } from "stream-chat";
+import { DefaultStreamChatGenerics } from "stream-chat-react/dist/types/types";
 
 interface IProps {
   isCreating: boolean;
@@ -36,22 +38,20 @@ const CompanyHeader = () => (
   </div>
 );
 
-const customChannelTeamFilter = (channels) => {
+const customChannelTeamFilter = (channels: Channel<DefaultStreamChatGenerics>[]) => {
   return channels.filter((channel) => channel.type === "team");
 };
 
-const customChannelMessagingFilter = (channels) => {
+const customChannelMessagingFilter = (channels: Channel<DefaultStreamChatGenerics>[]) => {
   return channels.filter((channel) => channel.type === "messaging");
 };
 
 const ChannelListContent = ({
-  isCreating,
   setIsCreating,
   setIsEditing,
   setCreateType,
   setToggleContainer,
 }: {
-  isCreating: boolean;
   setIsCreating: Dispatch<SetStateAction<boolean>>;
   setIsEditing: Dispatch<SetStateAction<boolean>>;
   setCreateType: Dispatch<SetStateAction<string>>;
@@ -71,7 +71,7 @@ const ChannelListContent = ({
     window.location.reload();
   };
 
-  const filters = { members: { $in: [client.userID] } };
+  const filters = { members: { $in: [client.userID!] } };
 
   return (
     <>
@@ -86,7 +86,6 @@ const ChannelListContent = ({
             <TeamChannelList
               {...listProps}
               type="team"
-              isCreating={isCreating}
               setIsCreating={setIsCreating}
               setIsEditing={setIsEditing}
               setCreateType={setCreateType}
@@ -110,7 +109,6 @@ const ChannelListContent = ({
             <TeamChannelList
               {...listProps}
               type="messaging"
-              isCreating={isCreating}
               setIsCreating={setIsCreating}
               setIsEditing={setIsEditing}
               setCreateType={setCreateType}
@@ -132,7 +130,6 @@ const ChannelListContent = ({
   );
 };
 const ChannelListContainer = ({
-  isCreating,
   setIsCreating,
   setIsEditing,
   setCreateType,
@@ -143,10 +140,10 @@ const ChannelListContainer = ({
     <>
       <div className="channel-list__container">
         <ChannelListContent
-          isCreating={isCreating}
           setIsCreating={setIsCreating}
           setIsEditing={setIsEditing}
           setCreateType={setCreateType}
+          setToggleContainer={setToggleContainer}
         />
       </div>
 

@@ -7,6 +7,7 @@ import { CloseCreateChannel } from "../assets";
 interface IProps {
   createType: string;
   setIsCreating: Dispatch<SetStateAction<boolean>>;
+  setIsEditing: Dispatch<SetStateAction<boolean>>;
 }
 
 const ChannelNameInput = ({
@@ -14,7 +15,7 @@ const ChannelNameInput = ({
   setChannelName,
 }: {
   channelName: string;
-  setChannelName: Dispatch<SetStateAction<boolean>>;
+  setChannelName: Dispatch<SetStateAction<string>>;
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -36,14 +37,14 @@ const ChannelNameInput = ({
   );
 };
 
-const CreateChannel = ({ createType, setIsCreating }: IProps) => {
+const CreateChannel = ({ createType, setIsCreating, setIsEditing }: IProps) => {
   const { client, setActiveChannel } = useChatContext();
   const [selectedUsers, setSelectedUsers] = useState<Array<string>>([
     client.userID || "",
   ]);
   const [channelName, setChannelName] = useState("");
 
-  const createChannel = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const createChannel = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
 
     try {
@@ -56,7 +57,7 @@ const CreateChannel = ({ createType, setIsCreating }: IProps) => {
 
       setChannelName("");
       setIsCreating(false);
-      setSelectedUsers([client.userID]);
+      setSelectedUsers([client.userID!]);
       setActiveChannel(newChannel);
     } catch (error) {
       console.log(error);
@@ -71,7 +72,7 @@ const CreateChannel = ({ createType, setIsCreating }: IProps) => {
             ? "Create a New Channel"
             : "Send a Direct Message"}
         </p>
-        <CloseCreateChannel setIsCreating={setIsCreating} />
+        <CloseCreateChannel setIsCreating={setIsCreating} setIsEditing={setIsEditing}/>
       </div>
       {createType === "team" && (
         <ChannelNameInput

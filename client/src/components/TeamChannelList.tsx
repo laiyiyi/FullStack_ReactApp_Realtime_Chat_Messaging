@@ -1,11 +1,11 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, PropsWithChildren } from "react";
 
 import { AddChannel } from "../assets";
+import { APIErrorResponse, ErrorFromResponse } from "stream-chat";
 
 interface IProps {
-  children: string;
-  error: boolean;
-  loading: boolean;
+  error: ErrorFromResponse<APIErrorResponse> | null;
+  loading?: boolean | undefined;
   type: string;
   setIsCreating: Dispatch<SetStateAction<boolean>>;
   setIsEditing: Dispatch<SetStateAction<boolean>>;
@@ -15,14 +15,14 @@ interface IProps {
 
 const TeamChannelList = ({
   children,
-  error = false,
+  error = null,
   loading,
   type,
   setIsCreating,
   setIsEditing,
   setCreateType,
   setToggleContainer
-}: IProps) => {
+}: PropsWithChildren<IProps>) => {
   if (error) {
     return type === "team" ? (
       <div className="team-channel-list">

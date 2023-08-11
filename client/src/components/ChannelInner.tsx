@@ -75,12 +75,9 @@ const TeamChannelHeader = ({
         <div className="team-channel-header__name-wrapper">
           {members.map(({ user }, i) => (
             <div key={i} className="team-channel-header__name-multi">
-              <Avatar
-                image={user?.image}
-                size={32}
-              />
+              <Avatar image={user?.image} size={32} />
               <p className="team-channel-header__name user">
-                {user.fullName || user.id}
+                <>{user?.fullName || user?.id}</>
               </p>
             </div>
           ))}

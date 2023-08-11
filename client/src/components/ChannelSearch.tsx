@@ -30,11 +30,11 @@ const ChannelSearch = ({
       const channelResponse = client.queryChannels({
         type: "team",
         name: { $autocomplete: text },
-        members: { $in: [client.userID] },
+        members: { $in: [client.userID!] },
       });
 
       const userResponse = client.queryUsers({
-        id: { $ne: client.userID },
+        id: { $ne: client.userID! },
         name: { $autocomplete: text },
       });
 
@@ -58,7 +58,7 @@ const ChannelSearch = ({
     getChannels(event.target.value);
   };
 
-  const setChannel = (channel: Channel<DefaultStreamChatGenerics> | UserResponse<DefaultStreamChatGenerics>) => {
+  const setChannel = (channel: any) => {
     setQuery("");
     setActiveChannel(channel);
   };

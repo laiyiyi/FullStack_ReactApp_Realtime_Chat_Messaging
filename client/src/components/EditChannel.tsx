@@ -9,12 +9,12 @@ const ChannelNameInput = ({
   setChannelName,
 }: {
   channelName: string;
-  setChannelName: Dispatch<SetStateAction<boolean>>;
+  setChannelName: Dispatch<SetStateAction<string | undefined>>;
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
-    setChannelName(event.target.value);
+    setChannelName(event.target.value!);
   };
 
   return (
@@ -32,15 +32,17 @@ const ChannelNameInput = ({
 };
 
 const EditChannel = ({
+  setIsCreating,
   setIsEditing,
 }: {
+  setIsCreating: Dispatch<SetStateAction<boolean>>;
   setIsEditing: Dispatch<SetStateAction<boolean>>;
 }) => {
   const { channel } = useChatContext();
   const [channelName, setChannelName] = useState(channel?.data?.name);
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
 
-  const updateChannel = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const updateChannel = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
 
     const nameChanged =
@@ -66,10 +68,10 @@ const EditChannel = ({
     <div className="edit-channel__container">
       <div className="edit-channel__header">
         <p>Edit Channel</p>
-        <CloseCreateChannel setIsEditing={setIsEditing} />
+        <CloseCreateChannel setIsCreating={setIsCreating} setIsEditing={setIsEditing} />
       </div>
       <ChannelNameInput
-        channelName={channelName}
+        channelName={channelName!}
         setChannelName={setChannelName}
       />
       <UserList setSelectedUsers={setSelectedUsers} />

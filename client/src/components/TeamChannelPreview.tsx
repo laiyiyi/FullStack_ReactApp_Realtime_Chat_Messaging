@@ -1,9 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 import { Channel } from "stream-chat";
 import { Avatar, useChatContext } from "stream-chat-react";
+import { DefaultStreamChatGenerics } from "stream-chat-react/dist/types/types";
 
 interface IProps {
-  channel: Channel;
+  // channel: {data: ChannelResponse<DefaultStreamChatGenerics>, state: {members: ChannelMemberResponse<DefaultStreamChatGenerics>[]}, id: string};
+  channel: Channel<DefaultStreamChatGenerics>;
   type: string;
   setIsCreating: Dispatch<SetStateAction<boolean>>;
   setIsEditing: Dispatch<SetStateAction<boolean>>;
@@ -21,23 +23,21 @@ const TeamChannelPreview = ({
 
   const ChannelPreview = () => (
     <p className="channel-preview__item">
-      {channel?.data?.name || channel?.data?.id}
+      <>{channel.data?.name || channel.data?.id}</>
     </p>
   );
 
   const DirectPreview = () => {
     const members = Object.values(channel.state.members).filter(
-      ({ user }) => user.id !== client.userID
+      ({ user }) => user?.id !== client.userID
     );
 
     return (
       <div className="channel-preview__item single">
-        <Avatar
-          image={members[0]?.user?.image}
-          name={members[0]?.user?.fullName || members[0]?.user?.id}
-          size={24}
-        />
-        <p>{members[0]?.user?.fullName || members[0]?.user?.id}</p>
+        <Avatar image={members[0]?.user?.image} size={24} />
+        <p>
+          <>{members[0]?.user?.fullName || members[0]?.user?.id}</>
+        </p>
       </div>
     );
   };
